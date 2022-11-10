@@ -1,3 +1,12 @@
+/**
+ * UNIVERSIDAD DEL VALLE DE GUATEMALA
+ * DEPARTAMENTO DE INGENIERIA
+ * PROGRAMACION ORIENTADA A OBJETOS
+ * @author  Eunice Anahi Mata Ixcayau
+ * @date    10 - 11 - 2022
+ * Interfaz del carro B.
+ */
+
 import java.util.ArrayList;
 
 /**
