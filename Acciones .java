@@ -26,7 +26,7 @@ public interface Acciones {
     public String cargarEmisora(int emisora);
     //------------------------------------------------------------------------------------------------------------------------------------------------
     //Modo reproduccion
-    public String seleccionarLista();
+    public String seleccionarLista(int i);
     /**
      * Metodo para cambiar la cacion
      * @param direccion 1. siguiente 2. anterior
