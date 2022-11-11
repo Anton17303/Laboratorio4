@@ -8,6 +8,7 @@
  */
 
 import java.util.ArrayList;
+import java.lang.Double;
 
 import javax.swing.plaf.basic.BasicTreeUI.TreeCancelEditingAction;
 
@@ -19,6 +20,7 @@ public class radio implements Acciones{
     private int NumListaCancionUsar;
     private boolean ModoTelefonoConexion;
     private int cancionActual;
+    private int ultContactoLlamado;
     private ArrayList<Double> ListaEmisoras;
     private ArrayList<contactos> ListaContactos;
     private ArrayList<Cancion> ListaCanciones1;
@@ -33,6 +35,7 @@ public class radio implements Acciones{
         this.NumListaCancionUsar = 0;
         this.ModoTelefonoConexion = false;
         this.cancionActual = 0;
+        this.ultContactoLlamado = 0;
         this.ListaEmisoras = new ArrayList<Double>();
         this.ListaContactos = new ArrayList<contactos>();
         this.ListaCanciones1 = new ArrayList<Cancion>();
@@ -151,15 +154,29 @@ public class radio implements Acciones{
         this.cancionActual = cancionActual;
     }
 
+    /**
+     * @return int return the ultContactoLlamado
+     */
+    public int getUltContactoLlamado() {
+        return ultContactoLlamado;
+    }
+
+    /**
+     * @param ultContactoLlamado the ultContactoLlamado to set
+     */
+    public void setUltContactoLlamado(int ultContactoLlamado) {
+        this.ultContactoLlamado = ultContactoLlamado;
+    }
+
     // --------------------------------------------- Metodos ---------------------------------------------
     public String cambiarVolumen(String vol){
         String r = "Volumen: ";
         if(vol.equalsIgnoreCase("+")){
-            this.volumen =+ 1;
+            this.volumen = this.volumen + 1;
             r = r + getVolumen();
         }
         else if(vol.equalsIgnoreCase("-")){
-            this.volumen =- 1;
+            this.volumen = this.volumen - 1;
             r = r + getVolumen();
         }
         return r;
@@ -194,7 +211,7 @@ public class radio implements Acciones{
     //MODO RADIO ---------------------------------------------------------------------------------------------------------------------
     @Override
     public String cambiarFmAm() {
-        string r = "Cambiando...";
+        String r = "Cambiando de "+ getFmAm()+"...";
         if (getFmAm()=="FM"){ 
             setFmAm("AM");
             r = r + "\n Cambiado a AM";
@@ -210,10 +227,10 @@ public class radio implements Acciones{
     public String cambiarEmisora(String operador) {
         String r = "Emisora: " + getFmAm();
         if(operador.equalsIgnoreCase("+")){ //aumenta la emisora en un intevalos de 0.5
-            this.EmisoraActual =+ 0.5;
+            this.EmisoraActual = this.EmisoraActual + 0.5;
         }
         else if(operador.equalsIgnoreCase("-")){ //disminuye la emisora en un intevalos de 0.5
-            this.EmisoraActual =- 0.5;
+            this.EmisoraActual = this.EmisoraActual - 0.5;
         }
         r = r + " " + getEmisoraActual();
         return r;
@@ -221,8 +238,9 @@ public class radio implements Acciones{
 
     @Override
     public String guardarEmisora(String emisora) {
-        ListaEmisoras.add(emisora);
-        return "Emisora " + emisora + " guardada";
+        double n = Double.parseDouble(emisora);
+        ListaEmisoras.add(n);
+        return "Emisora " + n + " guardada";
     }
 
     @Override
@@ -235,7 +253,7 @@ public class radio implements Acciones{
     //MODO  REPRODUCCION---------------------------------------------------------------------------------------------------------------------
     @Override
     public String seleccionarLista(int i) {
-        String r = "Lista de Cancion seleccionada" + i ;
+        String r = " -- Lista de Cancion seleccionada" + i ;
         setNumListaCancionUsar(i);
         return r;
     }
@@ -247,12 +265,12 @@ public class radio implements Acciones{
      */
     @Override
     public String cambiarCancion(int direccion) {
-        String r = "Cancion cambiada: \n Reproduciendo...\n";
+        String r = "Cancion cambiada: \n ";
         if(direccion == 1){
-            this.cancionActual =+ 1;
+            this.cancionActual = this.cancionActual + 1;
         }
         else if(direccion == 2){
-            this.cancionActual =- 1;
+            this.cancionActual = this.cancionActual - 1;
         }
 
         if(NumListaCancionUsar == 1){
@@ -309,7 +327,14 @@ public class radio implements Acciones{
 
     @Override
     public String llamar(int contacto) {
-        String r = " ~~ Llamando a: " + ListaContactos.get(contacto).toString();
+        String r = "";
+        if(contacto > ListaContactos.size()){
+            r = "Contacto no exite";
+        }
+        else{
+            setUltContactoLlamado(contacto);
+            r = " ~~ Llamando a: " + ListaContactos.get(contacto).toString();
+        }
         return r;
     }
 
@@ -320,8 +345,7 @@ public class radio implements Acciones{
 
     @Override
     public String llamarUltimoContacto() {
-        int i = ListaContactos.size();
-        return llamar(i);
+        return llamar(getUltContactoLlamado());
     }
 
     //MODO  PRODUCTIVIDAD ---------------------------------------------------------------------------------------------------------------------
@@ -333,5 +357,8 @@ public class radio implements Acciones{
         }
         return r;
     }
+
+
+    
 
 }
