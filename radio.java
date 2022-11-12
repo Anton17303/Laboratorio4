@@ -32,7 +32,7 @@ public class radio implements Acciones{
         this.volumen = 10;
         this.FmAm = "FM";
         this.EmisoraActual = 0.00;
-        this.NumListaCancionUsar = 0;
+        this.NumListaCancionUsar = 1;
         this.ModoTelefonoConexion = false;
         this.cancionActual = 0;
         this.ultContactoLlamado = 0;
@@ -41,6 +41,35 @@ public class radio implements Acciones{
         this.ListaCanciones1 = new ArrayList<Cancion>();
         this.ListaCanciones2 = new ArrayList<Cancion>();
         this.listadoTarjetaPresentacion = new ArrayList<TarjetaPresentacion>();
+
+        //DATOS INCIALES -------------------------------------------------------------------------------------------------------------------------------------------
+        ListaCanciones1.add(new Cancion("Marygolds", "3:41", "Early eyes", "Indie-pop"));
+        ListaCanciones1.add(new Cancion("New Rules", "3:45", "Dua Lipa", "Pop"));
+        ListaCanciones1.add(new Cancion("Break my heart", "3:50", "Dua Lipa", "Pop"));
+        ListaCanciones1.add(new Cancion("False Confidence", "4:30", "Noah Kohan", "Pop"));
+        ListaCanciones1.add(new Cancion("Sunflower", "2:39", "Post Malone, Swae Lee", "Hip-hop, Dream-Pop"));
+        ListaCanciones1.add(new Cancion("Odo", "3:28", "Ado", "Hip-hop, Rap"));
+        ListaCanciones1.add(new Cancion("Show me", "3:07", "KEY", "Hip-hop, Rap"));
+
+
+        ListaCanciones2.add(new Cancion("Sunflower", "4:12", "Rex orange county", "Alternativa independiente"));
+        ListaCanciones2.add(new Cancion("Don't miss me", "2:04", "Claire Rosinkranz", "Alternativa independiente, pop"));
+        ListaCanciones2.add(new Cancion("Small talk", "3:15", "Call security", "Pop"));
+        ListaCanciones2.add(new Cancion("Maniac", "3:06", "Conan Grey", "Pop"));
+        ListaCanciones2.add(new Cancion("Lemon boy", "4:33", "Cavetown", "Indie Pop"));
+        ListaCanciones2.add(new Cancion("I love you so", "2:27", "The Walters", "Indie"));
+        ListaCanciones2.add(new Cancion("Anithing you want", "2:04", "JAWNY", "Indie, pop, alternativa"));
+        ListaCanciones2.add(new Cancion("BOY", "3:51", "King Gnu", "Dream-Pop, Indie"));
+        ListaCanciones2.add(new Cancion("Puppy princess", "4:16", "Hot Freaks", "Indie dream"));
+
+        ListaContactos.add(new contactos("Eunice Mata", "35463625"));
+        ListaContactos.add(new contactos("Jose Anton", "25250202"));
+        ListaContactos.add(new contactos("BFF", "66699966"));
+
+        listadoTarjetaPresentacion.add(new TarjetaPresentacion("88225544", "Eunice Mata", "Ingieniera en conmputacion"));
+        listadoTarjetaPresentacion.add(new TarjetaPresentacion("77994433", "Jose Anton", "Ingieniera en conmputacion"));
+        //----------------------------------------------------------------------------------------------------------------------------------------------------------
+
     }
 
     //Setters y getters.
@@ -195,12 +224,12 @@ public class radio implements Acciones{
 
         if(getNumListaCancionUsar() == 1){
             for (int i=0 ; i<ListaCanciones1.size() ; i++){
-                r = r + " " + i + ". " + ListaCanciones1.get(i).toString() + "\n";
+                r = r + "Cancion " + i + ". ----------------\n" + ListaCanciones1.get(i).toString() + "\n---------------------------\n\n";
             }
         }
         else if(getNumListaCancionUsar() == 2){
             for (int i=0 ; i<ListaCanciones2.size() ; i++){
-                r = r + " " + i + ". " + ListaCanciones2.get(i).toString() + "\n";
+                r = r + " " + i + ". " + ListaCanciones2.get(i).toString() + "\n\n";
             }
         }
 
@@ -265,7 +294,7 @@ public class radio implements Acciones{
      */
     @Override
     public String cambiarCancion(int direccion) {
-        String r = "Cancion cambiada: \n ";
+        String r = "Cancion cambiada: \n";
         if(direccion == 1){
             this.cancionActual = this.cancionActual + 1;
         }
@@ -294,10 +323,10 @@ public class radio implements Acciones{
         String r = "Reproduciendo... \n";
 
         if(getNumListaCancionUsar() == 1){
-            ListaCanciones1.get(i).toString();
+            r = r + ListaCanciones1.get(i).toString();
         }
         else if (getNumListaCancionUsar() == 2){
-            ListaCanciones2.get(i).toString();
+            r = r + ListaCanciones2.get(i).toString();
         }
 
         return r;
@@ -357,8 +386,5 @@ public class radio implements Acciones{
         }
         return r;
     }
-
-
-    
 
 }

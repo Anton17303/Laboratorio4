@@ -145,12 +145,14 @@ public class Principal {
                                 try {
                                     System.out.println("Selecciones una opcion: \n 1. Siguiente\n 2. Anterior\n");
                                     int op3 = teclado.nextInt(); teclado.nextLine();
-                                    if(MiRadio.getCancionActual() == 0 && op3 ==2){
-                                        System.out.println("No hay cancion anterior a la actual");
-                                    }
-                                    else{
-                                        System.out.println(MiRadio.cambiarCancion(op3));
-                                    }
+                                    if(op3 == 1 || op3 == 2){
+                                        if(MiRadio.getCancionActual() == 0 && op3 ==2){
+                                            System.out.println("No hay cancion anterior a la actual");
+                                        }
+                                        else{
+                                            System.out.println(MiRadio.cambiarCancion(op3));
+                                        }
+                                    } else {System.out.println("Seleccione una de las acciones disponibles");}
 
                                     teclado.nextLine();
                                     System.out.println(menuReproduccion);

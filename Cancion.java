@@ -75,7 +75,7 @@ public class Cancion {
     public String toString() {
         // TODO Auto-generated method stub
         String cadena2 = "";
-        cadena2 = "Nombre "+ nombre +"\nDurabilidad: "+durabilidad+"\nGenero: "+genero+"\nAutor: "+autor;
+        cadena2 = " Nombre: "+ nombre +"\n Durabilidad: "+durabilidad+"\n Genero: "+genero+"\n Autor: "+autor;
         return cadena2;
     }
 
